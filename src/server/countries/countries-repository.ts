@@ -2,7 +2,7 @@ import type { Country } from "@/features/countries/types/country";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 const countryColumns =
-  "code, cca2, name_common, name_official, currencies, languages, timezones, region, subregion, borders, flag, landlocked, gini, cost_of_living_index, safety_index, extra_facts";
+  "code, name_common, name_official, currencies, languages, timezones, flag, gini, cost_of_living_index, safety_index, extra_facts";
 
 export async function getCountryByCode(countryCode: string) {
   const supabase = createSupabaseServerClient();

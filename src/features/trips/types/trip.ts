@@ -1,4 +1,4 @@
-export type TripType = "city" | "beach" | "adventure" | "relax";
+export type TripType = "city" | "beach" | "adventure" | "business";
 
 export type Trip = {
   id: string;

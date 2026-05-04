@@ -8,5 +8,19 @@ export function getTripDurationDays(dateStart: string, dateEnd: string) {
 }
 
 export function formatTripDateRange(dateStart: string, dateEnd: string) {
-  return `${dateStart} - ${dateEnd}`;
+  const formattedStart = formatTripDate(dateStart);
+  const formattedEnd = formatTripDate(dateEnd);
+
+  if (formattedStart === formattedEnd) {
+    return formattedStart;
+  }
+
+  return `${formattedStart} - ${formattedEnd}`;
+}
+
+function formatTripDate(date: string) {
+  return new Intl.DateTimeFormat("en", {
+    day: "numeric",
+    month: "long",
+  }).format(new Date(`${date}T00:00:00`));
 }
