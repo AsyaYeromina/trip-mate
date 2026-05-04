@@ -1,6 +1,6 @@
 import type { TripType } from "@/features/trips/types/trip";
 
-const tripTypes: TripType[] = ["city", "beach", "adventure", "relax"];
+const tripTypes: TripType[] = ["city", "beach", "adventure", "business"];
 
 export function getRequiredSearchParam(url: URL, name: string) {
   const value = url.searchParams.get(name)?.trim();
@@ -20,7 +20,17 @@ export function isValidCountryCode(value: unknown): value is string {
 }
 
 export function isValidDate(value: unknown): value is string {
-  return typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value);
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    return false;
+  }
+
+  const date = new Date(`${value}T00:00:00.000Z`);
+
+  if (Number.isNaN(date.getTime())) {
+    return false;
+  }
+
+  return date.toISOString().slice(0, 10) === value;
 }
 
 export function isValidCoordinate(value: unknown, min: number, max: number): value is number {

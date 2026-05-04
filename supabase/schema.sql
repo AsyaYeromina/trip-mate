@@ -2,17 +2,12 @@ create extension if not exists pgcrypto;
 
 create table if not exists public.countries (
   code text primary key,
-  cca2 text not null unique,
   name_common text not null,
   name_official text,
   currencies jsonb,
   languages jsonb,
   timezones text[],
-  region text,
-  subregion text,
-  borders text[],
   flag text,
-  landlocked boolean,
   gini jsonb,
   cost_of_living_index numeric,
   safety_index integer,
@@ -30,7 +25,7 @@ create table if not exists public.trips (
   timezone text,
   date_start date not null,
   date_end date not null,
-  trip_type text not null check (trip_type in ('city', 'beach', 'adventure', 'relax')),
+  trip_type text not null check (trip_type in ('city', 'beach', 'adventure', 'business')),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   constraint trips_valid_dates check (date_start <= date_end)

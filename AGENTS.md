@@ -93,22 +93,17 @@ Recommended columns:
 ```sql
 countries
 - code text primary key -- alpha-2, e.g. "BE"
-- cca2 text
 - name_common text not null
 - currencies jsonb
 - languages jsonb
-- timezones text[]
-- region text
-- subregion text
-- borders text[]
+- timezones text[] -- REST Countries UTC offsets, e.g. ["UTC+01:00"]
 - flag text
-- landlocked boolean
 - gini jsonb
 ```
 
-REST Countries populated from endpoint:
+Country timezones are populated from REST Countries by mapping each response row's `cca2` to `countries.code`.
 ```text
-https://restcountries.com/v3.1/all?fields=name,cc2,currencies,languages,timezones,region,subregion,borders,flag,landlocked,gini
+https://restcountries.com/v3.1/all?fields=cca2,timezones
 ```
 
 
@@ -131,6 +126,8 @@ trips
 - date_end date not null
 - trip_type text not null
 ```
+
+Supported MVP trip types are `city`, `beach`, `adventure`, and `business`.
 
 Use `owner_key`, not `user_id`, while there is no real authentication.
 
