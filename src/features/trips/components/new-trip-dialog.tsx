@@ -234,6 +234,7 @@ export function NewTripDialog({
 
   const shouldShowDestinationMenu =
     isDestinationOpen && destinationQuery.trim().length >= 2 && !selectedDestination;
+  const todayDateValue = formatDateValue(new Date());
 
   return (
     <Dialog
@@ -340,7 +341,7 @@ export function NewTripDialog({
           {openDatePicker && calendarPosition && typeof document !== "undefined"
             ? createPortal(
                 <CalendarPanel
-                  minDate={openDatePicker === "end" ? dateStart : undefined}
+                  minDate={openDatePicker === "end" ? dateStart || todayDateValue : todayDateValue}
                   month={calendarMonth}
                   onChange={openDatePicker === "start" ? handleStartDateChange : handleEndDateChange}
                   onMonthChange={setCalendarMonth}
@@ -526,7 +527,7 @@ function CalendarPanel({
                 isToday && "border border-cyan-200/45 text-cyan-100",
                 isSelected &&
                   "border border-violet-100/70 bg-violet-500/45 text-white shadow-[0_0_18px_rgba(168,85,247,0.35)]",
-                isDisabled && "cursor-not-allowed text-violet-100/18 hover:bg-transparent hover:text-violet-100/18",
+                isDisabled && "cursor-not-allowed text-violet-50 opacity-70 hover:bg-transparent hover:text-violet-50",
               )}
               onClick={() => onChange(day.value)}
             >
