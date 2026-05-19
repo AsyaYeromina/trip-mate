@@ -246,15 +246,18 @@ export function NewTripDialog({
         }
       }}
     >
-      <DialogContent className="dark glass-panel border-white/15 bg-[#070a19]/92 p-6 text-white shadow-[0_0_70px_rgba(168,85,247,0.32)] sm:max-w-xl">
-        <DialogHeader>
-          <DialogTitle className="text-3xl font-semibold text-white">Plan a New Trip</DialogTitle>
+      <DialogContent className="dark glass-panel flex max-h-[calc(100dvh-1rem)] flex-col overflow-hidden border-white/15 bg-[#070a19]/92 p-4 text-white shadow-[0_0_70px_rgba(168,85,247,0.32)] sm:max-h-[calc(100dvh-2rem)] sm:max-w-xl sm:p-6">
+        <DialogHeader className="shrink-0 pr-8">
+          <DialogTitle className="text-2xl font-semibold text-white sm:text-3xl">Plan a New Trip</DialogTitle>
           <DialogDescription className="text-violet-100/62">
             Choose a destination, dates, and trip type.
           </DialogDescription>
         </DialogHeader>
 
-        <form className="space-y-5" onSubmit={handleSubmit}>
+        <form
+          className="min-h-0 space-y-4 overflow-y-auto overscroll-contain pr-1 pb-[env(safe-area-inset-bottom)] sm:space-y-5 sm:pr-2"
+          onSubmit={handleSubmit}
+        >
           <div className="space-y-2">
             <Label className="text-violet-100/78" htmlFor="destination">Destination</Label>
             <div className="relative">
